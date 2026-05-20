@@ -1,14 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Aethra Properties</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aethra & Co. Real Estate</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #0d2438;
+      background: #f6efe5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    :root { --navy:#0d2438; --ivory:#f7f0e6; --sand:#d8c6ad; --white:#fffaf2; }
+    .hero {
+      min-height: 100vh; position: relative;
+      background: linear-gradient(90deg, rgba(247,240,230,.92), rgba(247,240,230,.55), rgba(13,36,56,.18)), url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=2200&q=90');
+      background-size: cover; background-position: center; animation: slowZoom 18s ease-in-out infinite alternate;
+    }
+    @keyframes slowZoom { from { background-size: 100%; } to { background-size: 108%; } }
+    nav { position: fixed; top:0; left:0; width:100%; z-index:20; padding:28px 6vw; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(16px); background:rgba(247,240,230,.58); border-bottom:1px solid rgba(13,36,56,.08); }
+    .brand { display:flex; align-items:center; gap:14px; letter-spacing:2px; }
+    .brand-mark { width:40px; height:40px; border:6px solid var(--navy); border-bottom:0; border-radius:40px 40px 0 0; position:relative; }
+    .brand-mark:after { content:''; position:absolute; width:22px; height:18px; background:var(--navy); bottom:-28px; left:3px; }
+    .brand-text strong { display:block; font-family:Georgia,serif; font-size:22px; letter-spacing:2px; font-weight:500; }
+    .brand-text span { font-size:10px; letter-spacing:3px; }
+    .menu { display:flex; gap:34px; align-items:center; font-size:12px; letter-spacing:2px; text-transform:uppercase; }
+    .button { padding:14px 24px; border:1px solid var(--navy); background:var(--navy); color:white; letter-spacing:2px; font-size:12px; text-transform:uppercase; transition:.4s ease; display:inline-block; }
+    .button:hover { background:transparent; color:var(--navy); transform:translateY(-3px); }
+    .hero-content { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 6vw 60px; max-width:920px; animation:fadeUp 1.3s ease both; }
+    .eyebrow { font-size:12px; letter-spacing:4px; text-transform:uppercase; margin-bottom:28px; }
+    h1 { font-family:Georgia,serif; font-size:clamp(52px,8vw,118px); font-weight:400; line-height:.96; letter-spacing:-3px; margin-bottom:34px; }
+    .hero-content p { max-width:520px; font-size:18px; line-height:1.8; color:rgba(13,36,56,.78); margin-bottom:44px; }
+    .hero-actions { display:flex; gap:22px; align-items:center; }
+    .link-line { font-size:12px; letter-spacing:3px; text-transform:uppercase; border-bottom:1px solid var(--navy); padding-bottom:8px; transition:.4s; }
+    .link-line:hover { letter-spacing:4px; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(35px); } to { opacity:1; transform:translateY(0); } }
+    .floating-card { position:absolute; right:6vw; bottom:8vh; width:320px; padding:28px; background:rgba(255,250,242,.55); backdrop-filter:blur(22px); border:1px solid rgba(255,255,255,.45); box-shadow:0 30px 80px rgba(13,36,56,.18); }
+    .floating-card h3 { font-family:Georgia,serif; font-size:26px; font-weight:400; margin-bottom:12px; }
+    .floating-card p { font-size:14px; line-height:1.7; color:rgba(13,36,56,.7); }
+    section { padding:110px 6vw; }
+    .intro { display:grid; grid-template-columns:1fr 1.4fr; gap:70px; align-items:end; background:var(--white); }
+    .section-label { font-size:12px; letter-spacing:4px; text-transform:uppercase; margin-bottom:20px; color:rgba(13,36,56,.6); }
+    h2 { font-family:Georgia,serif; font-size:clamp(38px,5vw,78px); font-weight:400; line-height:1.05; letter-spacing:-1px; }
+    .intro p, .rivieria p, .services p { font-size:17px; line-height:1.9; color:rgba(13,36,56,.72); }
+    .properties { background:#f6efe5; }
+    .properties-header { display:flex; justify-content:space-between; align-items:end; margin-bottom:50px; gap:30px; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+    .property-card { background:rgba(255,250,242,.72); border:1px solid rgba(13,36,56,.08); overflow:hidden; transition:.55s ease; }
+    .property-card:hover { transform:translateY(-10px); box-shadow:0 30px 80px rgba(13,36,56,.16); }
+    .property-card img { width:100%; height:310px; object-fit:cover; transition:.75s ease; }
+    .property-card:hover img { transform:scale(1.07); }
+    .property-info { padding:28px; }
+    .property-info h3 { font-family:Georgia,serif; font-size:28px; font-weight:400; margin-bottom:8px; }
+    .location { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(13,36,56,.58); margin-bottom:20px; }
+    .details { display:flex; gap:18px; font-size:13px; color:rgba(13,36,56,.72); margin-bottom:22px; }
+    .price { font-size:18px; font-weight:bold; }
+    .rivieria { background:linear-gradient(90deg,#efe2d2,#f8f1e7); display:grid; grid-template-columns:1fr 1.2fr; gap:70px; align-items:center; }
+    .image-panel { min-height:520px; background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=90'); background-size:cover; background-position:center; box-shadow:0 35px 90px rgba(13,36,56,.18); }
+    .service-grid { margin-top:50px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(13,36,56,.12); }
+    .service { background:var(--white); padding:48px; min-height:260px; transition:.45s ease; }
+    .service:hover { background:#f2e5d4; }
+    .service h3 { font-family:Georgia,serif; font-size:30px; font-weight:400; margin-bottom:18px; }
+    .contact { background:linear-gradient(90deg,rgba(247,240,230,.95),rgba(247,240,230,.72)), url('https://images.unsplash.com/photo-1515488764276-beab7607c1e6?auto=format&fit=crop&w=1800&q=90'); background-size:cover; background-position:center; display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start; }
+    form { background:rgba(255,250,242,.6); backdrop-filter:blur(20px); padding:42px; border:1px solid rgba(255,255,255,.5); }
+    input, textarea { width:100%; border:0; border-bottom:1px solid rgba(13,36,56,.35); padding:18px 0; margin-bottom:18px; background:transparent; font-size:14px; outline:none; color:var(--navy); }
+    textarea { height:110px; resize:none; }
+    .contact-info { margin-top:34px; font-size:16px; line-height:2.1; color:rgba(13,36,56,.72); }
+    footer { padding:34px 6vw; display:flex; justify-content:space-between; gap:30px; background:#e9dccb; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:rgba(13,36,56,.65); }
+    .whatsapp { position:fixed; right:28px; bottom:28px; width:58px; height:58px; border-radius:50%; background:#25D366; color:white; display:flex; align-items:center; justify-content:center; font-size:28px; z-index:30; box-shadow:0 15px 40px rgba(0,0,0,.25); transition:.35s; }
+    .whatsapp:hover { transform:translateY(-5px) scale(1.05); }
+    .reveal { opacity:0; transform:translateY(45px); animation:fadeUp 1s ease forwards; animation-timeline:view(); animation-range:entry 0% cover 35%; }
+    @media (max-width:900px) { nav{padding:20px 5vw}.menu{display:none}.floating-card{display:none}.intro,.rivieria,.contact{grid-template-columns:1fr}.grid,.service-grid{grid-template-columns:1fr}section{padding:80px 5vw}.hero-content{padding:120px 5vw 60px}footer{flex-direction:column}@keyframes slowZoom{from{background-size:cover}to{background-size:cover}} }
+  </style>
 </head>
-
-<body style="background-color:black; color:white; text-align:center; font-family:Arial;">
-
-  <h1>Welcome to Aethra Properties</h1>
-
-  <p>Luxury Real Estate in Athens</p>
-
+<body>
+  <nav>
+    <a class="brand" href="#top"><div class="brand-mark"></div><div class="brand-text"><strong>AETHRA & CO.</strong><span>REAL ESTATE</span></div></a>
+    <div class="menu"><a href="#properties">Properties</a><a href="#services">Services</a><a href="#rivieria">Athens Riviera</a><a href="#about">About</a><a href="#contact" class="button">Get in Touch</a></div>
+  </nav>
+  <header class="hero" id="top">
+    <div class="hero-content"><div class="eyebrow">Athens Riviera · Greece</div><h1>Luxury Real Estate in Athens Riviera</h1><p>Exclusive homes, refined investment opportunities, and a lifestyle shaped by Mediterranean light, architecture, and the sea.</p><div class="hero-actions"><a href="#properties" class="button">Discover Properties</a><a href="#contact" class="link-line">Private Inquiry</a></div></div>
+    <div class="floating-card"><h3>Curated Riviera Living</h3><p>From Glyfada to Vouliagmeni, we connect international buyers with exceptional homes and rare locations.</p></div>
+  </header>
+  <section class="intro reveal" id="about"><div><div class="section-label">Aethra & Co.</div><h2>Where property meets lifestyle.</h2></div><p>Aethra & Co. is a boutique real estate agency specializing in luxury properties across Athens and the Greek Riviera. Our approach is personal, elegant, and focused on helping clients find not only a property, but a place that feels like their next chapter.</p></section>
+  <section class="properties" id="properties"><div class="properties-header reveal"><div><div class="section-label">Featured Properties</div><h2>Handpicked for you</h2></div><a href="#contact" class="link-line">Request Full Portfolio</a></div><div class="grid">
+    <article class="property-card reveal"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=90" alt="Luxury villa"><div class="property-info"><h3>Villa in Vouliagmeni</h3><div class="location">Vouliagmeni</div><div class="details"><span>5 Beds</span><span>5 Baths</span><span>500 m²</span></div><div class="price">€6,800,000</div></div></article>
+    <article class="property-card reveal"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=90" alt="Modern apartment"><div class="property-info"><h3>Apartment in Glyfada</h3><div class="location">Glyfada</div><div class="details"><span>3 Beds</span><span>3 Baths</span><span>180 m²</span></div><div class="price">€2,200,000</div></div></article>
+    <article class="property-card reveal"><img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?auto=format&fit=crop&w=1200&q=90" alt="Villa with pool"><div class="property-info"><h3>Villa in Voula</h3><div class="location">Voula</div><div class="details"><span>4 Beds</span><span>4 Baths</span><span>360 m²</span></div><div class="price">€3,950,000</div></div></article>
+  </div></section>
+  <section class="rivieria" id="rivieria"><div class="reveal"><div class="section-label">Athens Riviera</div><h2>Coastal elegance, minutes from the city.</h2><p>The Athens Riviera offers a rare blend of seaside serenity, modern architecture, private residences, fine dining, marinas, beaches, and international lifestyle appeal.</p><a href="#contact" class="link-line">Explore Riviera Areas</a></div><div class="image-panel reveal"></div></section>
+  <section class="services" id="services"><div class="reveal"><div class="section-label">Services</div><h2>Discreet, personal, refined.</h2></div><div class="service-grid"><div class="service reveal"><h3>Property Search</h3><p>Curated property selection based on lifestyle, investment goals, and location preferences.</p></div><div class="service reveal"><h3>Buyer Support</h3><p>Guidance through viewings, communication, negotiation, and every step of the purchase process.</p></div><div class="service reveal"><h3>Luxury Listings</h3><p>Elegant presentation for premium homes with strong visuals, international positioning, and refined marketing.</p></div></div></section>
+  <section class="contact" id="contact"><div class="reveal"><div class="section-label">Contact</div><h2>Let’s find your dream property.</h2><p>Get in touch for private viewings, property recommendations, or collaboration inquiries.</p><div class="contact-info"><div>Email: info@aethra-realestate.com</div><div>Phone / WhatsApp: +30 690 123 4567</div><div>Location: Athens, Greece</div><div>Instagram: @aethra.realestate</div></div></div><form class="reveal"><input type="text" placeholder="Full Name"><input type="email" placeholder="Email"><input type="text" placeholder="Phone"><textarea placeholder="Message"></textarea><button class="button" type="button">Send Message</button></form></section>
+  <footer><div>AETHRA & CO. REAL ESTATE</div><div>Luxury Real Estate · Athens Riviera</div><div>© 2026 Aethra & Co.</div></footer>
+  <a class="whatsapp" href="https://wa.me/306901234567" target="_blank">✆</a>
 </body>
 </html>
